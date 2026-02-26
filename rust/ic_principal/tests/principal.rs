@@ -314,3 +314,22 @@ fn rangemap_steplite_impl_works() {
     assert!(set.contains(&p2));
     assert!(!set.contains(&Principal::from_slice(&[0, 1, 4, 0])));
 }
+
+#[test]
+fn size_principal() {
+    let anonymous_principal = Principal::anonymous();
+    assert_eq!(anonymous_principal.size(), 2);
+
+    let management_canister = Principal::management_canister();
+    assert_eq!(management_canister.size(), 1);
+
+    let key = b"42";
+    let self_authenticating = Principal::self_authenticating(key);
+    assert_eq!(self_authenticating.size(), 30);
+
+    let from_slice = Principal::from_slice(&TEST_CASE_BYTES);
+    assert_eq!(from_slice.size(), 10);
+
+    let from_text = Principal::from_text(TEST_CASE_TEXT).unwrap();
+    assert_eq!(from_text.size(), 10);
+}

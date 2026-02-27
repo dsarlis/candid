@@ -237,12 +237,6 @@ impl Principal {
     pub fn as_slice(&self) -> &[u8] {
         &self.bytes[..self.len as usize]
     }
-
-    /// Returns the size of a `Principal` in bytes.
-    #[inline]
-    pub fn size(&self) -> usize {
-        1 + std::mem::size_of_val(&self.bytes[..self.len as usize])
-    }
 }
 
 #[cfg(feature = "convert")]

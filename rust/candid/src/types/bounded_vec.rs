@@ -367,8 +367,6 @@ mod tests {
 }
 
 mod data_size {
-    use ic_principal::Principal;
-
     /// Trait to reasonably estimate the memory usage of a value in bytes.
     ///
     /// Default implementation returns zero.
@@ -415,9 +413,9 @@ mod data_size {
         }
     }
 
-    impl DataSize for Principal {
+    impl DataSize for ic_principal::Principal {
         fn data_size(&self) -> usize {
-            self.size()
+            self.as_slice().len()
         }
     }
 
